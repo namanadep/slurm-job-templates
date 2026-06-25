@@ -9,7 +9,7 @@
 #SBATCH --time=00:10:00
 #SBATCH --partition=normal
 
-# Read parameters from file — one set per line
+# Read parameters from file - one set per line
 PARAM_FILE="$(dirname "$0")/params.txt"
 
 # Extract the line corresponding to this task's index (0-based)

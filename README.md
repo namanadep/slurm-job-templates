@@ -1,6 +1,6 @@
 # slurm-job-templates
 
-A reference collection of production-ready Slurm batch scripts covering every common HPC job type — serial, job arrays, shared-memory (OpenMP), distributed-memory (MPI), and GPU. All scripts were tested on a local Slurm 21.08 cluster running four nodes with two partitions (`normal` and `debug`).
+A reference collection of production-ready Slurm batch scripts covering every common HPC job type - serial, job arrays, shared-memory (OpenMP), distributed-memory (MPI), and GPU. All scripts were tested on a local Slurm 21.08 cluster running four nodes with two partitions (`normal` and `debug`).
 
 ## Environment
 
@@ -18,7 +18,7 @@ A reference collection of production-ready Slurm batch scripts covering every co
 
 ### Serial jobs (`serial/`)
 
-**`hello_world.sh`** — minimal batch script covering the core `#SBATCH` directives every job needs.
+**`hello_world.sh`** - minimal batch script covering the core `#SBATCH` directives every job needs.
 
 ```bash
 #SBATCH --job-name=hello_world
@@ -29,17 +29,17 @@ A reference collection of production-ready Slurm batch scripts covering every co
 #SBATCH --partition=normal
 ```
 
-**`python_job.sh`** — runs a Python Monte Carlo π estimate inside a batch job. Shows how to embed a Python heredoc inside a batch script without creating a separate `.py` file.
+**`python_job.sh`** - runs a Python Monte Carlo π estimate inside a batch job. Shows how to embed a Python heredoc inside a batch script without creating a separate `.py` file.
 
 #### Submitting the jobs
 
 ![sbatch submission output showing assigned job IDs](screenshots/02_sbatch_submit.png)
 
-#### Job output — hello_world
+#### Job output - hello_world
 
 ![hello_world job output showing node, job ID and progress](screenshots/05_job_output.png)
 
-#### Job output — Monte Carlo Pi
+#### Job output - Monte Carlo Pi
 
 ![pi_estimate job output showing Monte Carlo result](screenshots/06_pi_output.png)
 
@@ -49,7 +49,7 @@ A reference collection of production-ready Slurm batch scripts covering every co
 
 Job arrays are the standard way to run the same code across many input values without submitting dozens of separate jobs. Slurm tracks them as a single entity (`ARRAY_JOB_ID_TASK_INDEX`).
 
-**`array_job.sh`** — launches 8 independent tasks (`--array=1-8`). Each task reads its index from `$SLURM_ARRAY_TASK_ID` and computes a distinct value.
+**`array_job.sh`** - launches 8 independent tasks (`--array=1-8`). Each task reads its index from `$SLURM_ARRAY_TASK_ID` and computes a distinct value.
 
 ```bash
 #SBATCH --array=1-8
@@ -57,10 +57,10 @@ Job arrays are the standard way to run the same code across many input values wi
 #SBATCH --cpus-per-task=1
 ```
 
-**`array_with_params.sh`** — reads a `params.txt` file line by line, using the task index as a row selector. Useful for hyperparameter sweeps where each line is a distinct configuration (learning rate, batch size, epochs).
+**`array_with_params.sh`** - reads a `params.txt` file line by line, using the task index as a row selector. Useful for hyperparameter sweeps where each line is a distinct configuration (learning rate, batch size, epochs).
 
 ```
-# params.txt — one config per line
+# params.txt - one config per line
 0.001 32  50
 0.001 64  50
 0.01  32  30
@@ -68,7 +68,7 @@ Job arrays are the standard way to run the same code across many input values wi
 0.1   32  20
 ```
 
-#### sacct — all 8 array tasks completed
+#### sacct - all 8 array tasks completed
 
 ![sacct showing all 8 array tasks with COMPLETED state and 0:0 exit codes](screenshots/07_array_sacct.png)
 
@@ -76,7 +76,7 @@ Job arrays are the standard way to run the same code across many input values wi
 
 ### OpenMP (`parallel/openmp_job.sh`)
 
-Single-node, multi-threaded jobs. Key directive is `--cpus-per-task` — Slurm allocates the cores and you set `OMP_NUM_THREADS` to match.
+Single-node, multi-threaded jobs. Key directive is `--cpus-per-task` - Slurm allocates the cores and you set `OMP_NUM_THREADS` to match.
 
 ```bash
 #SBATCH --ntasks=1

@@ -46,6 +46,6 @@ try:
     print(f"Throughput: {flops / elapsed / 1e12:.2f} TFLOPS")
 
 except ImportError:
-    print("PyTorch not found — install with: pip install torch --index-url https://download.pytorch.org/whl/cu121")
+    print("PyTorch not found - install with: pip install torch --index-url https://download.pytorch.org/whl/cu121")
     sys.exit(1)
 EOF
